@@ -13,8 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Check Out
-      uses: actions/checkout@main
       
     - name: Prepare the environment
       run: |
