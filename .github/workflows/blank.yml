@@ -27,7 +27,7 @@ jobs:
         mkdir dt
       
     - name: Generate random UUID file
-    run: |
+      run: |
         RANDOM_NAME=$(uuidgen)
         echo "Generated file name: ${RANDOM_NAME}.img"
         echo "random_filename=${RANDOM_NAME}.img" >> $GITHUB_ENV
