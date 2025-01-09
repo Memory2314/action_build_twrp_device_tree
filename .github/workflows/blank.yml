@@ -26,13 +26,19 @@ jobs:
         sudo apt -y install cpio wget
         mkdir dt
       
+    - name: Generate random UUID file
+    run: |
+        RANDOM_NAME=$(uuidgen)
+        echo "Generated file name: ${RANDOM_NAME}.img"
+        echo "random_filename=${RANDOM_NAME}.img" >> $GITHUB_ENV
+
     - name: Download boot or recovery img
       run: |
-        aria2c "${{ github.event.inputs.IMG_URL }}"
+        aria2c "${{ github.event.inputs.IMG_URL }}" -o ${{ env.random_filename }}
       
     - name: Start build
       run: |
-        python3 -m twrpdtgen -o dt/ *.img
+        python3 -m twrpdtgen -o dt/ ./${{ env.random_filename }}
     - name: ZIP device tree
       run: |
         zip -r DeviceTree.zip ./dt
